@@ -5,13 +5,29 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Ingrese la posición de partida (fila y columna):");
-        int filaInicio = scanner.nextInt();
-        int columnaInicio = scanner.nextInt();
+        int filaInicio, columnaInicio, filaFinal, columnaFinal;
 
-        System.out.println("Ingrese la posición final (fila y columna):");
-        int filaFinal = scanner.nextInt();
-        int columnaFinal = scanner.nextInt();
+        // Pedir la posición de partida (fila y columna) y validarla
+        do {
+            System.out.println("Ingrese la fila de partida (1-8):");
+            filaInicio = obtenerEnteroValido(scanner);
+        } while (filaInicio < 1 || filaInicio > 8);
+
+        do {
+            System.out.println("Ingrese la columna de partida (1-8):");
+            columnaInicio = obtenerEnteroValido(scanner);
+        } while (columnaInicio < 1 || columnaInicio > 8);
+
+        // Pedir la posición final (fila y columna) y validarla
+        do {
+            System.out.println("Ingrese la fila de destino (1-8):");
+            filaFinal = obtenerEnteroValido(scanner);
+        } while (filaFinal < 1 || filaFinal > 8);
+
+        do {
+            System.out.println("Ingrese la columna de destino (1-8):");
+            columnaFinal = obtenerEnteroValido(scanner);
+        } while (columnaFinal < 1 || columnaFinal > 8);
 
         boolean movimientoValido = esMovimientoAlfilValido(filaInicio, columnaInicio, filaFinal, columnaFinal);
 
@@ -23,13 +39,15 @@ public class Main {
         }
     }
 
-    public static boolean esMovimientoAlfilValido(int filaInicio, int columnaInicio, int filaFinal, int columnaFinal) {
-        // Verificar que ambas posiciones estén dentro del tablero de ajedrez (8x8)
-        if (filaInicio < 0 || filaInicio >= 8 || columnaInicio < 0 || columnaInicio >= 8 ||
-                filaFinal < 0 || filaFinal >= 8 || columnaFinal < 0 || columnaFinal >= 8) {
-            return false;
+    public static int obtenerEnteroValido(Scanner scanner) {
+        while (!scanner.hasNextInt()) {
+            System.out.println("Ingrese un número válido.");
+            scanner.next(); // Limpiar la entrada no válida
         }
+        return scanner.nextInt();
+    }
 
+    public static boolean esMovimientoAlfilValido(int filaInicio, int columnaInicio, int filaFinal, int columnaFinal) {
         // Calcular la diferencia entre las filas y las columnas
         int diferenciaFila = Math.abs(filaInicio - filaFinal);
         int diferenciaColumna = Math.abs(columnaInicio - columnaFinal);
@@ -39,8 +57,8 @@ public class Main {
     }
 
     public static void mostrarTablero(int filaInicio, int columnaInicio, int filaFinal, int columnaFinal) {
-        for (int fila = 0; fila < 8; fila++) {
-            for (int columna = 0; columna < 8; columna++) {
+        for (int fila = 1; fila <= 8; fila++) {
+            for (int columna = 1; columna <= 8; columna++) {
                 if ((fila == filaInicio && columna == columnaInicio) || (fila == filaFinal && columna == columnaFinal)) {
                     System.out.print("A "); // Representa la posición inicial y final del alfil
                 } else {
