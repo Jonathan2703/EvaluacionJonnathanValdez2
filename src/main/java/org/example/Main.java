@@ -25,6 +25,7 @@ public class Main {
             tablero.mostrarTablero(filaInicio, columnaInicio, filaFinal, columnaFinal);
             System.out.println("El movimiento del alfil es válido.");
         } else {
+            tablero.mostrarTablero(filaInicio, columnaInicio, filaFinal, columnaFinal);
             System.out.println("El movimiento del alfil no es válido.");
         }
     }

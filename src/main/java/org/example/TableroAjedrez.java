@@ -10,9 +10,21 @@ public class TableroAjedrez {
     }
 
     public boolean esMovimientoAlfilValido(int filaInicio, int columnaInicio, int filaFinal, int columnaFinal) {
-        int diferenciaFila = Math.abs(filaInicio - filaFinal); // Obtener la diferencia entre las filas
-        int diferenciaColumna = Math.abs(columnaInicio - columnaFinal); // Obtener la diferencia entre las filas y las columnas
-        return diferenciaFila == diferenciaColumna; // Si la diferencia de filas es igual a la diferencia de columnas, el movimiento es válido
+        // Calcular la diferencia en filas y columnas.
+        int diferenciaFila = Math.abs(filaInicio - filaFinal);
+        int diferenciaColumna = Math.abs(columnaInicio - columnaFinal);
+
+        // Verificar si el alfil se mueve en una diagonal y la diferencia en filas y columnas es la misma.
+        boolean esDiagonal = diferenciaFila == diferenciaColumna;
+
+        // Verificar si el movimiento no es en el mismo lugar y es una diagonal.
+        if (esDiagonal && diferenciaFila > 0) {
+            // El movimiento es válido.
+            return true;
+        }
+
+        // Si no cumple las condiciones anteriores, el movimiento no es válido.
+        return false;
     }
 
     public void mostrarTablero(int filaInicio, int columnaInicio, int filaFinal, int columnaFinal) {
