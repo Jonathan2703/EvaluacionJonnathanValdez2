@@ -14,4 +14,13 @@ public class Validador {
         } while (valor < min || valor > max);
         return valor;
     }
+
+    public char obtenerLetraValida(Scanner scanner, String mensaje, String opcionesValidas) {
+        char letra;
+        do {
+            System.out.println(mensaje);
+            letra = scanner.next().toUpperCase().charAt(0);
+        } while (opcionesValidas.indexOf(letra) == -1);
+        return letra;
+    }
 }
